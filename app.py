@@ -220,6 +220,11 @@ with st.sidebar:
             unsafe_allow_html=True,
         )
 
+    st.divider()
+    with st.expander("ℹ️ About this App"):
+        st.caption("Developed by **Evans**")
+        st.caption("Framework: Streamlit + XGBoost")
+
 # ── Load resources ───────────────────────────────────────────────────────────
 res = load_resources()
 model_map = {"Random Forest": res["rf"], "XGBoost": res["xgb"], "MLP": res["mlp"]}
