@@ -135,115 +135,116 @@ st.set_page_config(
 # Global CSS
 # ─────────────────────────────────────────────────────────────────────────────
 
-st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg:      #0a0f1e;
-    --bg2:     #0d1628;
-    --card:    #111827;
-    --border:  #1e3a5f;
-    --cyan:    #00d4ff;
-    --cyan-dim:rgba(0,212,255,0.12);
-    --text:    #e2e8f0;
-    --muted:   #64748b;
-  }
+_CSS = """
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-  html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
-  #MainMenu, footer, header   { visibility: hidden; }
-  .block-container            { padding: 1.5rem 2rem 0 2rem; max-width: 1400px; }
+:root {
+  --bg:       #0a0f1e;
+  --bg2:      #0d1628;
+  --card:     #111827;
+  --border:   #1e3a5f;
+  --cyan:     #00d4ff;
+  --cyan-dim: rgba(0,212,255,0.12);
+  --text:     #e2e8f0;
+  --muted:    #64748b;
+}
 
-  [data-testid="stSidebar"] {
-    background: var(--bg2) !important;
-    border-right: 1px solid var(--border);
-  }
-  [data-testid="stSidebar"] * { font-family: 'DM Sans', sans-serif !important; }
+html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
+#MainMenu, footer, header   { visibility: hidden; }
+.block-container            { padding: 1.5rem 2rem 0 2rem; max-width: 1400px; }
 
-  .stTabs [data-baseweb="tab-list"] {
-    background: var(--card); border-radius: 10px;
-    padding: 4px; gap: 4px; border: 1px solid var(--border);
-  }
-  .stTabs [data-baseweb="tab"] {
-    font-family: 'Share Tech Mono', monospace !important;
-    font-size: 0.9rem; border-radius: 7px;
-    padding: 8px 20px; color: var(--muted) !important;
-  }
-  .stTabs [aria-selected="true"] {
-    background: var(--cyan-dim) !important;
-    color: var(--cyan) !important;
-    border-bottom: none !important;
-  }
+[data-testid="stSidebar"] {
+  background: var(--bg2) !important;
+  border-right: 1px solid var(--border);
+}
+[data-testid="stSidebar"] * { font-family: 'DM Sans', sans-serif !important; }
 
-  .stButton > button, [data-testid="baseButton-primary"] {
-    background: linear-gradient(135deg, #0077a8, #00d4ff) !important;
-    color: #0a0f1e !important;
-    font-family: 'Share Tech Mono', monospace !important;
-    font-weight: 700 !important;
-    border: none !important;
-    border-radius: 8px !important;
-    letter-spacing: 0.05em;
-  }
-  [data-testid="stDownloadButton"] > button {
-    background: transparent !important;
-    color: var(--cyan) !important;
-    border: 1px solid var(--cyan) !important;
-    font-family: 'Share Tech Mono', monospace !important;
-  }
-  [data-testid="stNumberInput"] input,
-  [data-testid="stSelectbox"] div {
-    font-family: 'Share Tech Mono', monospace !important;
-    font-size: 0.85rem !important;
-  }
+.stTabs [data-baseweb="tab-list"] {
+  background: var(--card); border-radius: 10px;
+  padding: 4px; gap: 4px; border: 1px solid var(--border);
+}
+.stTabs [data-baseweb="tab"] {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.9rem; border-radius: 7px;
+  padding: 8px 20px; color: var(--muted) !important;
+}
+.stTabs [aria-selected="true"] {
+  background: var(--cyan-dim) !important;
+  color: var(--cyan) !important;
+  border-bottom: none !important;
+}
 
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.75rem;
-  }
-  .stat-card .label {
-    font-size: 0.7rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted);
-    font-family: 'Share Tech Mono', monospace;
-  }
-  .stat-card .value {
-    font-size: 1.5rem; font-weight: 700;
-    font-family: 'Share Tech Mono', monospace; color: var(--cyan);
-  }
+.stButton > button, [data-testid="baseButton-primary"] {
+  background: linear-gradient(135deg, #0077a8, #00d4ff) !important;
+  color: #0a0f1e !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  letter-spacing: 0.05em;
+}
+[data-testid="stDownloadButton"] > button {
+  background: transparent !important;
+  color: var(--cyan) !important;
+  border: 1px solid var(--cyan) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+[data-testid="stNumberInput"] input,
+[data-testid="stSelectbox"] div {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.85rem !important;
+}
 
-  .threat-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 12px 24px; border-radius: 12px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 1.3rem; font-weight: 700;
-    letter-spacing: 0.08em; border: 2px solid; margin-bottom: 0.5rem;
-  }
+.stat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.75rem;
+}
+.stat-card .label {
+  font-size: 0.7rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+}
+.stat-card .value {
+  font-size: 1.5rem; font-weight: 700;
+  font-family: 'Share Tech Mono', monospace; color: var(--cyan);
+}
 
-  .count-card {
-    background: var(--card); border-left: 3px solid;
-    border-radius: 0 10px 10px 0; padding: 0.9rem 1.1rem; margin-bottom: 0.5rem;
-  }
-  .count-card .num { font-size: 1.8rem; font-weight: 700; font-family: 'Share Tech Mono', monospace; }
-  .count-card .lbl { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.threat-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 24px; border-radius: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.3rem; font-weight: 700;
+  letter-spacing: 0.08em; border: 2px solid; margin-bottom: 0.5rem;
+}
 
-  .section-header {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.75rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--cyan);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 6px; margin: 1.2rem 0 0.8rem 0;
-  }
+.count-card {
+  background: var(--card); border-left: 3px solid;
+  border-radius: 0 10px 10px 0; padding: 0.9rem 1.1rem; margin-bottom: 0.5rem;
+}
+.count-card .num { font-size: 1.8rem; font-weight: 700; font-family: 'Share Tech Mono', monospace; }
+.count-card .lbl { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
-  .app-footer {
-    margin-top: 3rem; padding: 1.5rem 0;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between;
-    align-items: center; flex-wrap: wrap; gap: 0.5rem;
-    font-size: 0.8rem; color: var(--muted);
-    font-family: 'Share Tech Mono', monospace;
-  }
-  .app-footer a { color: var(--cyan); text-decoration: none; }
-  .app-footer a:hover { text-decoration: underline; }
-</style>
-""", unsafe_allow_html=True)
+.section-header {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--cyan);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px; margin: 1.2rem 0 0.8rem 0;
+}
+
+.app-footer {
+  margin-top: 3rem; padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 0.5rem;
+  font-size: 0.8rem; color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+}
+.app-footer a { color: var(--cyan); text-decoration: none; }
+.app-footer a:hover { text-decoration: underline; }
+"""
+
+st.markdown(f"<style>{_CSS}</style>", unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -567,10 +568,6 @@ st.markdown("""
   <div>
     🛡️ &nbsp;NIDS · Network Intrusion Detection System &nbsp;·&nbsp;
     Trained on <a href="https://www.unb.ca/cic/datasets/nsl.html" target="_blank">NSL-KDD</a>
-  </div>
-  <div>
-    Developed by <span style="color:#00d4ff;font-weight:600">Evans</span>
-    &nbsp;·&nbsp; Akash S &nbsp;·&nbsp; Laniya Mohan
   </div>
 </div>
 """, unsafe_allow_html=True)
