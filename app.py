@@ -364,41 +364,42 @@ with tab_manual:
 
         with c1:
             st.markdown("**Traffic Volume**")
-            src_bytes          = st.number_input("src_bytes",          min_value=0, value=0,   help="Bytes from source → dest")
-            dst_bytes          = st.number_input("dst_bytes",          min_value=0, value=0,   help="Bytes from dest → source")
-            count              = st.number_input("count",              min_value=0, max_value=511, value=1, help="Connections to same host (last 2s)")
-            srv_count          = st.number_input("srv_count",          min_value=0, max_value=511, value=1, help="Connections to same service (last 2s)")
-            dst_host_count     = st.number_input("dst_host_count",     min_value=0, max_value=255, value=1)
-            dst_host_srv_count = st.number_input("dst_host_srv_count", min_value=0, max_value=255, value=1)
+            src_bytes          = st.number_input("Source Bytes",                    min_value=0, value=0,   help="Bytes sent from source to destination (src_bytes)")
+            dst_bytes          = st.number_input("Destination Bytes",               min_value=0, value=0,   help="Bytes sent from destination to source (dst_bytes)")
+            count              = st.number_input("Same-Host Connections (2s)",      min_value=0, max_value=511, value=1, help="Connections to the same host in the last 2 seconds (count)")
+            srv_count          = st.number_input("Same-Service Connections (2s)",   min_value=0, max_value=511, value=1, help="Connections to the same service in the last 2 seconds (srv_count)")
+            dst_host_count     = st.number_input("Dest Host Connection Count",      min_value=0, max_value=255, value=1, help="Number of connections to the same destination host (dst_host_count)")
+            dst_host_srv_count = st.number_input("Dest Host Service Count",         min_value=0, max_value=255, value=1, help="Connections to same service on destination host (dst_host_srv_count)")
 
         with c2:
             st.markdown("**Error Rates**")
-            serror_rate              = st.slider("serror_rate",              0.0, 1.0, 0.0, 0.01)
-            srv_serror_rate          = st.slider("srv_serror_rate",          0.0, 1.0, 0.0, 0.01)
-            dst_host_serror_rate     = st.slider("dst_host_serror_rate",     0.0, 1.0, 0.0, 0.01)
-            dst_host_srv_serror_rate = st.slider("dst_host_srv_serror_rate", 0.0, 1.0, 0.0, 0.01)
-            rerror_rate_val          = st.slider("dst_host_rerror_rate",     0.0, 1.0, 0.0, 0.01)
-            same_srv_rate            = st.slider("same_srv_rate",            0.0, 1.0, 1.0, 0.01)
-            diff_srv_rate            = st.slider("diff_srv_rate",            0.0, 1.0, 0.0, 0.01)
+            serror_rate              = st.slider("SYN Error Rate",                  0.0, 1.0, 0.0, 0.01, help="% of connections with SYN errors (serror_rate)")
+            srv_serror_rate          = st.slider("Service SYN Error Rate",          0.0, 1.0, 0.0, 0.01, help="% of same-service connections with SYN errors (srv_serror_rate)")
+            dst_host_serror_rate     = st.slider("Dest Host SYN Error Rate",        0.0, 1.0, 0.0, 0.01, help="% of connections to dest host with SYN errors (dst_host_serror_rate)")
+            dst_host_srv_serror_rate = st.slider("Dest Host Service SYN Error Rate",0.0, 1.0, 0.0, 0.01, help="% of same-service connections to dest host with SYN errors (dst_host_srv_serror_rate)")
+            rerror_rate_val          = st.slider("Dest Host REJ Error Rate",        0.0, 1.0, 0.0, 0.01, help="% of connections to dest host with REJ errors (dst_host_rerror_rate)")
+            same_srv_rate            = st.slider("Same Service Rate",               0.0, 1.0, 1.0, 0.01, help="% of connections to the same service (same_srv_rate)")
+            diff_srv_rate            = st.slider("Different Service Rate",          0.0, 1.0, 0.0, 0.01, help="% of connections to different services (diff_srv_rate)")
 
         with c3:
             st.markdown("**Host Rates**")
-            dst_host_same_srv_rate      = st.slider("dst_host_same_srv_rate",      0.0, 1.0, 1.0, 0.01)
-            dst_host_diff_srv_rate      = st.slider("dst_host_diff_srv_rate",      0.0, 1.0, 0.0, 0.01)
-            dst_host_same_src_port_rate = st.slider("dst_host_same_src_port_rate", 0.0, 1.0, 0.0, 0.01)
-            dst_host_srv_diff_host_rate = st.slider("dst_host_srv_diff_host_rate", 0.0, 1.0, 0.0, 0.01)
-            srv_diff_host_rate          = st.slider("srv_diff_host_rate",          0.0, 1.0, 0.0, 0.01)
+            dst_host_same_srv_rate      = st.slider("Dest Host Same Service Rate",       0.0, 1.0, 1.0, 0.01, help="% of connections to dest host using same service (dst_host_same_srv_rate)")
+            dst_host_diff_srv_rate      = st.slider("Dest Host Diff Service Rate",       0.0, 1.0, 0.0, 0.01, help="% of connections to dest host using different services (dst_host_diff_srv_rate)")
+            dst_host_same_src_port_rate = st.slider("Dest Host Same Source Port Rate",   0.0, 1.0, 0.0, 0.01, help="% of connections to dest host from same source port (dst_host_same_src_port_rate)")
+            dst_host_srv_diff_host_rate = st.slider("Dest Host Service Diff Host Rate",  0.0, 1.0, 0.0, 0.01, help="% of same-service connections to different hosts (dst_host_srv_diff_host_rate)")
+            srv_diff_host_rate          = st.slider("Service Different Host Rate",       0.0, 1.0, 0.0, 0.01, help="% of same-service connections to different hosts (srv_diff_host_rate)")
 
         st.markdown("---")
         cc1, cc2, cc3 = st.columns(3)
         with cc1:
             flag = st.selectbox("TCP Flag", ["SF","S0","REJ","RSTO","SH","RSTR","S1","S2","S3","OTH"],
-                                help="SF = normal close · S0 = no response (common in DoS)")
+                                help="SF = normal close · S0 = no response from dest (DoS indicator) · REJ = connection rejected")
         with cc2:
-            service = st.selectbox("Service", ["http","private","ftp_data","smtp",
-                                               "ftp","ssh","domain_u","ecr_i","other"])
+            service = st.selectbox("Network Service", ["http","private","ftp_data","smtp",
+                                               "ftp","ssh","domain_u","ecr_i","other"],
+                                   help="The network service on the destination")
         with cc3:
-            logged_in = st.selectbox("Logged In", [0, 1], help="1 = successful login")
+            logged_in = st.selectbox("User Logged In", [0, 1], help="1 = user successfully logged in to the system")
 
         submitted = st.form_submit_button("⚡  RUN CLASSIFICATION", use_container_width=True, type="primary")
 
